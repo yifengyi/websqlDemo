@@ -5,15 +5,28 @@
     <title>web sql demo</title>
     <meta charset="utf-8">
     <script type="text/javascript" src="js/jQuery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/db.db.js"></script>
+    <script type="text/javascript" src="js/db/jquery.db.js"></script>
 </head>
 
 <body>
-	<h2>web sql 测试!</h2>
+    <h1>web sql 测试!</h1>
+    <h2 href="" id="query">自定义条件查询</h2> 姓名：
+    <input type="text" name="name" value="">
+    <br> 年龄：
+    <input type="text" name="age" value="">
+    <br> 性别：
+    <input type="text" name="sex" value="">
+    <br>
+    
+
 </body>
 <script type="text/javascript" src="js/webSqlDemo.js"></script>
 <script type="text/javascript">
-	webSql.initDb();
-	webSql.query();
+webSql.initDb();
+
+$('#query').on('click', function() {
+    webSql.criteriaQuery();
+});
 </script>
+
 </html>
