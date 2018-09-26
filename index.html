@@ -11,6 +11,12 @@
 <body>
     <h1>web sql 测试!</h1>
     <input type="button" value="初始化表" id="initTable">
+    <input type="button" value="查询表数据" id="allData">
+    <div>
+        <table id="table" border="1">
+            
+        </table>
+    </div>
     <h2 >自定义条件查询</h2> 姓名：
     <input type="text" name="name" value="">
     <br> 年龄：
@@ -20,6 +26,7 @@
     <br>
     <input type="button" value="查询" id="query">
     查询结果:<div id="result"></div>
+    <input type="button" value="删除" id="del">
 </body>
 <script type="text/javascript" src="js/webSqlDemo.js"></script>
 <script type="text/javascript">
@@ -38,6 +45,13 @@ $('#query').on('click', function() {
     });
     console.log(parm);
     webSql.criteriaQuery(parm);
+});
+$('#del').on('click',function(){
+    webSql.deletData(1);
+});
+$('#allData').one('click',function(){
+    console.log('alldata');
+    webSql.queryAll();
 });
 </script>
 
