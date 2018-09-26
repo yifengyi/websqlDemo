@@ -10,22 +10,34 @@
 
 <body>
     <h1>web sql 测试!</h1>
-    <h2 href="" id="query">自定义条件查询</h2> 姓名：
+    <input type="button" value="初始化表" id="initTable">
+    <h2 >自定义条件查询</h2> 姓名：
     <input type="text" name="name" value="">
     <br> 年龄：
     <input type="text" name="age" value="">
     <br> 性别：
     <input type="text" name="sex" value="">
     <br>
-    
-
+    <input type="button" value="查询" id="query">
+    查询结果:<div id="result"></div>
 </body>
 <script type="text/javascript" src="js/webSqlDemo.js"></script>
 <script type="text/javascript">
-webSql.initDb();
 
+webSql.initDb();
+$('#initTable').on('click', function() {
+    webSql.insertData();
+});
 $('#query').on('click', function() {
-    webSql.criteriaQuery();
+    var parm = {};
+    $.each($('input:text'),function(ind,obj){
+        var val = $(obj).val();
+        if(val){
+            parm[$(obj).attr('name')]=val;
+        }
+    });
+    console.log(parm);
+    webSql.criteriaQuery(parm);
 });
 </script>
 

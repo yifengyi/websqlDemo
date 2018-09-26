@@ -2,13 +2,13 @@
  * @Author: wujf
  * @Date:   2018-09-13 17:40:35
  * @Last Modified by:   wujf
- * @Last Modified time: 2018-09-17 17:43:55
+ * @Last Modified time: 2018-09-26 16:38:07
  */
 var webSql = {
-
+   
+    //初始化数据库
     initDb: function() {
-        var _db = $.db('myDB', '1.0', 'My Database', 5 * 1024 * 1000);
-
+        var  _db= $.db('myDB', '', 'My Database', 5 * 1024 * 1000);
         _db.createTable({
             name: "teacher",
             columns: [
@@ -24,7 +24,10 @@ var webSql = {
                 console.log("Something went wrong....");
             }
         });
-
+    },
+    //插入数据
+    insertData: function() {
+        var  _db= $.db('myDB', '', 'My Database', 5 * 1024 * 1000);
         //批量添加
         _db.batchInsert("teacher", {
             data: [{
@@ -52,9 +55,8 @@ var webSql = {
             }
         });
     },
-    criteriaQuery: function() {
-        var _db = $.db('myDB', '1.0', 'My Database', 5 * 1024 * 1000);
-
+    criteriaQuery: function(param) {
+        var  _db= $.db('myDB', '', 'My Database', 5 * 1024 * 1000);
         //单个条件查询,
         /*var whereParm = _db.restriction.eq('sex', '女');
         var whereParm2 = _db.restriction.gt('age', 22);
@@ -73,16 +75,18 @@ var webSql = {
 
 
         //多条件查询
-        var whereParm3 = _db.restriction.allEq({ sex: '女', age: 23 });
+        var whereParm3 = _db.restriction.allEq(param);
 
         _db.criteria('teacher').add(whereParm3).list(function(transaction, results) {
                 var rows = results.rows;
-
+                var str = '';
                 for (var i = 0; i < rows.length; i++) {
                     var row = rows.item(i);
-                    console.log(row);
-                    console.log(row.sex + " " + row.name + " " + row.age);
+                    //console.log(row);
+                    str+= row.sex + " " + row.name + " " + row.age ;
+                    //console.log(row.sex + " " + row.name + " " + row.age);
                 }
+                $('#result').html(str);
             },
             function(transaction, error) {
                 console.log("Something went wrong....");
